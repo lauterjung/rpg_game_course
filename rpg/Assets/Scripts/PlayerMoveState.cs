@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMoveState : EntityState
+public class PlayerMoveState : PlayerGroundedState
 {
     public PlayerMoveState(Player player, StateMachine stateMachine, string stateName) : base(player, stateMachine, stateName)
     {
@@ -16,5 +16,7 @@ public class PlayerMoveState : EntityState
         {
             stateMachine.ChangeState(player.IdleState);
         }
+
+        player.SetVelocity(player.MoveInput.x * player.moveSpeed, rb.velocity.y);
     }
 }

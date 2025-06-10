@@ -5,34 +5,40 @@ using UnityEngine;
 public abstract class EntityState
 {
     protected Player player;
+    protected PlayerInputSet input;
     protected StateMachine stateMachine;
-    protected string stateName;
+    protected string animationBoolName;
+    protected Animator animator;
+    protected Rigidbody2D rb;
 
-    public EntityState(Player player, StateMachine stateMachine, string stateName)
+    public EntityState(Player player, StateMachine stateMachine, string animationBoolName)
     {
         this.player = player;
         this.stateMachine = stateMachine;
-        this.stateName = stateName;
+        this.animationBoolName = animationBoolName;
+        this.animator = player.animator;
+        this.rb = player.rb;
+        this.input = player.input;
     }
 
     protected EntityState(StateMachine stateMachine, string stateName)
     {
         this.stateMachine = stateMachine;
-        this.stateName = stateName;
+        this.animationBoolName = stateName;
     }
 
     public virtual void Enter()
     {
-        Debug.Log("enter " + stateName);
+        animator.SetBool(animationBoolName, true);
     }
 
     public virtual void Update()
     {
-        Debug.Log("update " + stateName);
+        animator.SetFloat("yVelocity", rb.velocity.y);
     }
 
     public virtual void Exit()
     {
-        Debug.Log("exit " + stateName);
+        animator.SetBool(animationBoolName, false);
     }
 }
