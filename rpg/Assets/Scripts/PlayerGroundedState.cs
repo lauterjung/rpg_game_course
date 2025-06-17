@@ -12,14 +12,19 @@ public class PlayerGroundedState : EntityState
     {
         base.Update();
 
-        if (rb.velocity.y < 0)
+        if (rb.velocity.y < 0 && player.IsGroundDetected == false)
         {
             stateMachine.ChangeState(player.FallState);
         }
 
-        if (input.Player.Jump.WasPressedThisFrame() && player.IsGrounded)
+        if (input.Player.Jump.WasPressedThisFrame() && player.IsGroundDetected)
         {
             stateMachine.ChangeState(player.JumpState);
+        }
+        
+        if (input.Player.Attack.WasPressedThisFrame())
+        {
+            stateMachine.ChangeState(player.BasicAttackState);
         }
     }
 }
