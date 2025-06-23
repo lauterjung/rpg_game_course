@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerAiredState : EntityState
+public class PlayerAiredState : PlayerState
 {
     public PlayerAiredState(Player player, StateMachine stateMachine, string animationBoolName) : base(player, stateMachine, animationBoolName)
     {

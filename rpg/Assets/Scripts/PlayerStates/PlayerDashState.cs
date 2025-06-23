@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerDashState : EntityState
+public class PlayerDashState : PlayerState
 {
     private int dashDirection;
     private float originalGravityScale;
