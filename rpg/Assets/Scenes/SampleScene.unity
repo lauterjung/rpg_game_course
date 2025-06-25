@@ -21274,7 +21274,7 @@ GameObject:
   - component: {fileID: 1062402934}
   - component: {fileID: 1062402937}
   - component: {fileID: 1062402936}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21293,11 +21293,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b94920447830674ead3d2478868003c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groundCheckDistance: 1.4
-  wallCheckDistance: 0.4
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
+  groundCheckDistance: 1.4
+  wallCheckDistance: 0.4
   groundCheck: {fileID: 1062402935}
   primaryWallCheck: {fileID: 1280369343}
   secondaryWallCheck: {fileID: 1015832432}
@@ -21641,7 +21641,7 @@ GameObject:
   - component: {fileID: 1328992608}
   - component: {fileID: 1328992607}
   - component: {fileID: 1328992606}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: EnemySkeleton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21722,17 +21722,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 706cc96d77ebf784d94a6aab8da4df6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groundCheckDistance: 0.5
-  wallCheckDistance: 0.5
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
+  groundCheckDistance: 0.5
+  wallCheckDistance: 0.5
   groundCheck: {fileID: 693618649}
   primaryWallCheck: {fileID: 1328992609}
   secondaryWallCheck: {fileID: 0}
   MoveAnimationSpeedMultiplier: 1
+  battleMoveSpeed: 3
+  attackDistance: 2
+  battleTimeDuration: 5
+  minRetreatDistance: 1
+  retreatVelocity: {x: 5, y: 3}
   idleTime: 2
   moveSpeed: 1.4
+  playerCheck: {fileID: 1328992609}
+  whatIsPlayer:
+    serializedVersion: 2
+    m_Bits: 128
+  playerCheckDistance: 10
 --- !u!4 &1328992609
 Transform:
   m_ObjectHideFlags: 0
@@ -21742,7 +21752,7 @@ Transform:
   m_GameObject: {fileID: 1328992605}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.452, y: 0.313, z: 0}
+  m_LocalPosition: {x: -11.24, y: 0.36, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -60613,6 +60623,7 @@ GameObject:
   - component: {fileID: 2126876038}
   - component: {fileID: 2126876040}
   - component: {fileID: 2126876039}
+  - component: {fileID: 2126876041}
   m_Layer: 0
   m_Name: Animator
   m_TagString: Untagged
@@ -60708,6 +60719,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2126876041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2126876037}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ce883d260d343041a52cbf5ce764b83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

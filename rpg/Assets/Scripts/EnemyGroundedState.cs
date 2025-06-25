@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyAttackState : EnemyState
+public class EnemyGroundedState : EnemyState
 {
-    public EnemyAttackState(Enemy enemy, StateMachine stateMachine, string animationBoolName) : base(enemy, stateMachine, animationBoolName)
+    public EnemyGroundedState(Enemy enemy, StateMachine stateMachine, string animationBoolName) : base(enemy, stateMachine, animationBoolName)
     {
     }
 
@@ -12,7 +12,7 @@ public class EnemyAttackState : EnemyState
     {
         base.Update();
 
-        if (triggerCalled)
+        if (enemy.PlayerDetected() == true)
         {
             stateMachine.ChangeState(enemy.BattleState);
         }
