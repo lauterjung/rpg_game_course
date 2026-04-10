@@ -21,20 +21,20 @@ public abstract class PlayerState : EntityState
 
         if (input.Player.Dash.WasPressedThisFrame() && CanDash())
         {
-            stateMachine.ChangeState(player.DashState);
+            stateMachine.ChangeState(player.dashState);
         }
     }
 
-    public override void UpdateAnumationParameters()
+    public override void UpdateAnimationParameters()
     {
-        base.UpdateAnumationParameters();
+        base.UpdateAnimationParameters();
 
         animator.SetFloat("yVelocity", rb.velocity.y);
     }
 
     private bool CanDash()
     {
-        if (stateMachine.CurrentState == player.DashState || player.IsWallDetected)
+        if (stateMachine.currentState == player.dashState || player.IsWallDetected)
         {
             return false;
         }

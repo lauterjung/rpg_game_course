@@ -13,13 +13,13 @@ public class EnemyState : EntityState
         this.rb = enemy.rb;
     }
 
-    public override void UpdateAnumationParameters()
+    public override void UpdateAnimationParameters()
     {
-        base.UpdateAnumationParameters();
+        base.UpdateAnimationParameters();
 
         float battleAnimationSpeedMultiplier = enemy.battleMoveSpeed / enemy.moveSpeed;
 
         animator.SetFloat("battleAnimationSpeedMultiplier", battleAnimationSpeedMultiplier);
-        animator.SetFloat("moveAnimationSpeedMultiplier", enemy.MoveAnimationSpeedMultiplier);
+        animator.SetFloat("moveAnimationSpeedMultiplier", enemy.moveAnimationSpeedMultiplier);
         animator.SetFloat("xVelocity", rb.velocity.x);    }
 }

@@ -1,0 +1,48 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class PlayerWallSlideState : PlayerState
+{
+    public PlayerWallSlideState(Player player, StateMachine stateMachine, string animationBoolName) : base(player, stateMachine, animationBoolName)
+    {
+    }
+
+    public override void Update()
+    {
+        base.Update();
+        HandleWallSlide();
+
+        if (input.Player.Jump.WasPressedThisFrame())
+        {
+            stateMachine.ChangeState(player.wallJumpState);
+        }
+
+        if (player.IsWallDetected == false)
+        {
+            stateMachine.ChangeState(player.fallState);
+        }
+
+        if (player.IsGroundDetected)
+        {
+            stateMachine.ChangeState(player.idleState);
+
+            if (player.facingDirection != player.MoveInput.x)
+            {
+                player.Flip();
+            }
+        }
+    }
+
+    private void HandleWallSlide()
+    {
+        if (player.MoveInput.y < 0)
+        {
+            player.SetVelocity(player.MoveInput.x, rb.velocity.y);
+        }
+        else
+        {
+            player.SetVelocity(player.MoveInput.x, rb.velocity.y * player.wallSlideMoveMultiplier);
+        }
+    }
+}
