@@ -1,9 +1,12 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Entity : MonoBehaviour
 {
+    public event Action OnFlipped;
+
     protected StateMachine stateMachine;
     public Rigidbody2D rb { get; private set; }
     public Animator animator { get; private set; }
@@ -97,6 +100,8 @@ public class Entity : MonoBehaviour
         transform.Rotate(0, 180, 0);
         isFacingRight = !isFacingRight;
         facingDirection *= -1;
+
+        OnFlipped?.Invoke();
     }
 
     private void HandleCollisionDetection()

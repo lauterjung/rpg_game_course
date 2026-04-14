@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class EnemySkeleton : Enemy, ICounterable
 {
+    public bool CanBeCountered { get => canBeStunned; }
+
     protected override void Awake()
     {
         base.Awake();
@@ -26,11 +28,9 @@ public class EnemySkeleton : Enemy, ICounterable
     [ContextMenu("Stun enemy")]
     public void HandleCounter()
     {
-        if (!canBeStunned)
-        {
+        if (!CanBeCountered)
             return;
-        }
-        
+
         stateMachine.ChangeState(stunnedState);
     }
 }

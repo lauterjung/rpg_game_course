@@ -3,27 +3,31 @@ using UnityEngine;
 public class PlayerCombat : EntityCombat
 {
     [Header("Counter attack details")]
-    [SerializeField] private float counterDuration;
+    [SerializeField] private float counterRecovery = 0.1f;
 
     public bool CounterAttackPerformed()
     {
-        bool hasCounteredSomebody = false;
+        bool performedCounter = false;
 
         foreach (var target in GetDetectedColliders())
         {
             ICounterable counterable = target.GetComponent<ICounterable>();
-            if (counterable != null)
+
+            if (counterable == null)
+                continue;
+
+            if (counterable.CanBeCountered)
             {
                 counterable.HandleCounter();
-                hasCounteredSomebody = true;
+                performedCounter = true;
             }
         }
 
-        return hasCounteredSomebody;
+        return performedCounter;
     }
 
-    public float GetCounterDuration()
+    public float GetCounterRecoveryDuration()
     {
-        return counterDuration;
+        return counterRecovery;
     }
 }
