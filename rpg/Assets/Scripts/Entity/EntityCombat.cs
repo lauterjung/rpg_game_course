@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class EntityCombat : MonoBehaviour
 {
+    private EntityStats stats;
     private EntityVFX vfx;
-
-    public float damage = 10;
 
     [Header("Target detection")]
     [SerializeField] private Transform targetCheck;
@@ -15,20 +14,24 @@ public class EntityCombat : MonoBehaviour
 
     private void Awake()
     {
+        stats = GetComponent<EntityStats>();
         vfx = GetComponent<EntityVFX>();
     }
 
     public void PerformAttack()
     {
-        foreach(var target in GetDetectedColliders())
+        foreach (var target in GetDetectedColliders())
         {
             IDamageable damageable = target.GetComponent<IDamageable>();
 
-            if(damageable == null)
+            if (damageable == null)
                 continue;
 
-            damageable.TakeDamage(damage, transform);
-            vfx.CreateOnHitVfx(target.transform);
+            float damage =stats.GetPhysicalDamage(out bool isCrit);
+            bool targetWasHit = damageable.TakeDamage(damage, transform);
+
+            if (targetWasHit)
+                vfx.CreateOnHitVfx(target.transform, isCrit);
         }
     }
 

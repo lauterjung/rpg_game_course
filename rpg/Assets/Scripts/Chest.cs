@@ -9,7 +9,7 @@ public class Chest : MonoBehaviour, IDamageable
     [Header("Open Details")]
     [SerializeField] private Vector2 knockback = new Vector2(0, 3);
 
-    public void TakeDamage(float damage, Transform damageDealer)
+    public bool TakeDamage(float damage, Transform damageDealer)
     {
         vfx?.PlayOnDamageVfx();
         animator.SetBool("chestOpen", true);
@@ -18,5 +18,7 @@ public class Chest : MonoBehaviour, IDamageable
         rb.angularVelocity = Random.Range(-200f, 200f);
 
         // Drop items
+
+        return true;
     }
 }
