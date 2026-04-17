@@ -84,6 +84,44 @@ public class Player : Entity
         stateMachine.ChangeState(deadState);
     }
 
+    protected override IEnumerator SlowDownEntityCoroutine(float duration, float slowMultiplier)
+    {
+        float originalMoveSpeed = moveSpeed;
+        float originalJumpForce = jumpForce;
+        float originalAnimationSpeed = animator.speed;
+        Vector2 originalWallJumpForce = wallJumpForce;
+        Vector2 originalJumpAttackVelocity = jumpAttackVelocity;
+        Vector2[] originalAttackVelocity = new Vector2[attackVelocity.Length];
+        Array.Copy(attackVelocity, originalAttackVelocity, attackVelocity.Length);
+        
+        float speedMultiplier = 1 - slowMultiplier;
+
+        moveSpeed = moveSpeed * speedMultiplier;
+        jumpForce = jumpForce * speedMultiplier;
+        animator.speed = animator.speed * speedMultiplier;
+        wallJumpForce = wallJumpForce * speedMultiplier;
+        jumpAttackVelocity = jumpAttackVelocity * speedMultiplier;
+
+        for (int i = 0; i < attackVelocity.Length; i++)
+        {
+            attackVelocity[i] = attackVelocity[i] * speedMultiplier;
+        }
+
+        moveSpeed = originalMoveSpeed;
+        jumpForce = originalJumpForce;
+        animator.speed = originalAnimationSpeed;
+        wallJumpForce = originalWallJumpForce;
+        jumpAttackVelocity = originalJumpAttackVelocity;
+        attackVelocity = originalAttackVelocity;
+
+        for (int i = 0; i < attackVelocity.Length; i++)
+        {
+            attackVelocity[i] = originalAttackVelocity[i];
+        }
+
+        yield return new WaitForSeconds(duration);
+    }
+
     private void OnDisable()
     {
         input.Disable();

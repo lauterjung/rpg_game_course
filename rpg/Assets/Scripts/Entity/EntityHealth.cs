@@ -34,7 +34,7 @@ public class EntityHealth : MonoBehaviour, IDamageable
         UpdateHealthBar();
     }
 
-    public virtual bool TakeDamage(float damage, Transform damageDealer)
+    public virtual bool TakeDamage(float damage, float elementalDamage, ElementType element, Transform damageDealer)
     {
         if (isDead)
         {
@@ -47,14 +47,27 @@ public class EntityHealth : MonoBehaviour, IDamageable
             return false;
         }
 
-        Vector2 knockback = CalculateKnockback(damage, damageDealer);
-        float duration = CalculateDuration(damage);
+        EntityStats attackerStats = damageDealer.GetComponent<EntityStats>();
+        float armorReduction = attackerStats != null ? attackerStats.GetArmorReduction() : 0;
 
-        entity?.ReceiveKnockback(knockback, duration);
-        entityVfx?.PlayOnDamageVfx();
-        ReduceHp(damage);
+        float mitigation = stats.GetArmorMitigation(armorReduction);
+        float physicalDamageTaken = damage * (1 - mitigation);
+
+        float resistance = stats.GetElementalResistance(element);
+        float elementalDamageTaken = elementalDamage * (1 - resistance);
+        
+        TakeKnockback(damageDealer, physicalDamageTaken);
+        ReduceHp(physicalDamageTaken + elementalDamageTaken);
 
         return true;
+    }
+
+    private void TakeKnockback(Transform damageDealer, float finalDamage)
+    {
+        Vector2 knockback = CalculateKnockback(finalDamage, damageDealer);
+        float duration = CalculateDuration(finalDamage);
+
+        entity?.ReceiveKnockback(knockback, duration);
     }
 
     private bool WasAttackEvaded()
@@ -64,6 +77,8 @@ public class EntityHealth : MonoBehaviour, IDamageable
 
     protected void ReduceHp(float damage)
     {
+        entityVfx?.PlayOnDamageVfx();
+
         currentHp -= damage;
         UpdateHealthBar();
 
@@ -83,7 +98,7 @@ public class EntityHealth : MonoBehaviour, IDamageable
     {
         if (healthBar == null)
             return;
-            
+
         healthBar.value = currentHp / stats.GetMaxHealth();
     }
 

@@ -28,6 +28,7 @@ public class Entity : MonoBehaviour
     // Condition variables
     private bool isKnocked;
     private Coroutine knockbackCoroutine;
+    private Coroutine slowDownCoroutine;
 
     protected virtual void Awake()
     {
@@ -51,9 +52,23 @@ public class Entity : MonoBehaviour
 
     public virtual void EntityDeath()
     {
-        
+
     }
 
+    public virtual void SlowDownEntity(float duration, float slowMultiplier)
+    {
+        if (slowDownCoroutine != null)
+        {
+            StopCoroutine(slowDownCoroutine);
+        }
+
+        slowDownCoroutine = StartCoroutine(SlowDownEntityCoroutine(duration, slowMultiplier));
+    }
+
+    protected virtual IEnumerator SlowDownEntityCoroutine(float duration, float slowMultiplier)
+    {
+        yield return null;
+    }
 
     public void ReceiveKnockback(Vector2 knockback, float duration)
     {

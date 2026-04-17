@@ -22100,6 +22100,7 @@ GameObject:
   - component: {fileID: 1062402939}
   - component: {fileID: 1062402940}
   - component: {fileID: 1062402942}
+  - component: {fileID: 1062402943}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -22259,6 +22260,11 @@ MonoBehaviour:
   hitVfxColor: {r: 1, g: 0.818305, b: 0, a: 1}
   hitVfx: {fileID: 3653420523983694303, guid: 43365586ef7c5044bb749e3bef704812, type: 3}
   critHitVfx: {fileID: 7795480021857577928, guid: e6d4e38e1d2792a439ae6531a82c4816, type: 3}
+  chillVfxColor: {r: 0, g: 1, b: 1, a: 1}
+  originalHitVfxColor: {r: 0, g: 1, b: 1, a: 1}
+  tickInterval: 0.2
+  lightColorMultiplier: 1.2
+  darkColorMultiplier: 0.8
 --- !u!114 &1062402941
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22276,6 +22282,8 @@ MonoBehaviour:
   whatIsTarget:
     serializedVersion: 2
     m_Bits: 256
+  defaultDuration: 3
+  chillSlowMultiplier: 0.4
   counterRecovery: 0.25
 --- !u!114 &1062402942
 MonoBehaviour:
@@ -22307,10 +22315,12 @@ MonoBehaviour:
       baseValue: 250
     critChance:
       baseValue: 100
+    armorReduction:
+      baseValue: 0
     fireDamage:
       baseValue: 0
     iceDamage:
-      baseValue: 0
+      baseValue: 10
     lightningDamage:
       baseValue: 0
   defense:
@@ -22328,9 +22338,28 @@ MonoBehaviour:
   strenghtCritPowerMultiplier: 0.5
   strengthCritDamageMultiplier: 5
   vitalityHealthMultiplier: 5
+  vitalityArmorMultiplier: 1
   agilityCritChanceMultiplier: 0.5
   agilityEvasionMultiplier: 0.5
+  inteligenceElementalDamageMultiplier: 1
+  inteligenceElementalResistanceMultiplier: 0.5
+  elementalDamageContribution: 0.5
   evasionCap: 85
+  armorMitigationFactor: 100
+  armorMitigationCap: 0.85
+  elementalResistanceCap: 75
+--- !u!114 &1062402943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1062402933}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b03eb0b3c2d6fb499cf7187bd7acb38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1128426670
 GameObject:
   m_ObjectHideFlags: 0
@@ -22656,6 +22685,7 @@ GameObject:
   - component: {fileID: 1328992611}
   - component: {fileID: 1328992612}
   - component: {fileID: 1328992613}
+  - component: {fileID: 1328992614}
   m_Layer: 8
   m_Name: EnemySkeleton
   m_TagString: Untagged
@@ -22799,6 +22829,8 @@ MonoBehaviour:
   whatIsTarget:
     serializedVersion: 2
     m_Bits: 128
+  defaultDuration: 3
+  chillSlowMultiplier: 0.4
 --- !u!114 &1328992611
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22835,6 +22867,11 @@ MonoBehaviour:
   hitVfxColor: {r: 0.16037738, g: 0.16037738, b: 0.16037738, a: 1}
   hitVfx: {fileID: 3653420523983694303, guid: 43365586ef7c5044bb749e3bef704812, type: 3}
   critHitVfx: {fileID: 7795480021857577928, guid: e6d4e38e1d2792a439ae6531a82c4816, type: 3}
+  chillVfxColor: {r: 0, g: 1, b: 1, a: 1}
+  originalHitVfxColor: {r: 0, g: 1, b: 1, a: 1}
+  tickInterval: 0.2
+  lightColorMultiplier: 1.2
+  darkColorMultiplier: 0.8
   attackAlert: {fileID: 1442893242}
 --- !u!114 &1328992613
 MonoBehaviour:
@@ -22866,10 +22903,12 @@ MonoBehaviour:
       baseValue: 0
     critChance:
       baseValue: 0
+    armorReduction:
+      baseValue: 0
     fireDamage:
       baseValue: 0
     iceDamage:
-      baseValue: 0
+      baseValue: 10
     lightningDamage:
       baseValue: 0
   defense:
@@ -22887,9 +22926,28 @@ MonoBehaviour:
   strenghtCritPowerMultiplier: 0.5
   strengthCritDamageMultiplier: 5
   vitalityHealthMultiplier: 5
+  vitalityArmorMultiplier: 1
   agilityCritChanceMultiplier: 0.5
   agilityEvasionMultiplier: 0.5
+  inteligenceElementalDamageMultiplier: 1
+  inteligenceElementalResistanceMultiplier: 0.5
+  elementalDamageContribution: 0.5
   evasionCap: 85
+  armorMitigationFactor: 100
+  armorMitigationCap: 0.85
+  elementalResistanceCap: 75
+--- !u!114 &1328992614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1328992605}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b03eb0b3c2d6fb499cf7187bd7acb38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1329039423
 GameObject:
   m_ObjectHideFlags: 0
@@ -23209,6 +23267,11 @@ MonoBehaviour:
   hitVfxColor: {r: 1, g: 1, b: 1, a: 1}
   hitVfx: {fileID: 0}
   critHitVfx: {fileID: 0}
+  chillVfxColor: {r: 0, g: 1, b: 1, a: 1}
+  originalHitVfxColor: {r: 0, g: 1, b: 1, a: 1}
+  tickInterval: 0.2
+  lightColorMultiplier: 1.2
+  darkColorMultiplier: 0.8
 --- !u!1 &1392251154
 GameObject:
   m_ObjectHideFlags: 0
