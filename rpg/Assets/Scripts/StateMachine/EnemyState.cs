@@ -9,8 +9,10 @@ public class EnemyState : EntityState
     public EnemyState(Enemy enemy, StateMachine stateMachine, string animationBoolName) : base(stateMachine, animationBoolName)
     {
         this.enemy = enemy;
-        this.animator = enemy.animator;
-        this.rb = enemy.rb;
+        
+        animator = enemy.animator;
+        rb = enemy.rb;
+        entityStats = enemy.entityStats;
     }
 
     public override void UpdateAnimationParameters()

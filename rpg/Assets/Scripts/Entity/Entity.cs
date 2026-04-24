@@ -9,6 +9,7 @@ public class Entity : MonoBehaviour
 
     protected StateMachine stateMachine;
     public Rigidbody2D rb { get; private set; }
+    public EntityStats entityStats { get; private set; }
     public Animator animator { get; private set; }
 
     private bool isFacingRight = true;
@@ -33,6 +34,7 @@ public class Entity : MonoBehaviour
     protected virtual void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        entityStats = GetComponent<EntityStats>();
         animator = GetComponentInChildren<Animator>();
         stateMachine = new StateMachine();
     }

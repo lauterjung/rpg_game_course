@@ -13,8 +13,6 @@ public class PlayerBasicAttackState : PlayerState
     private int attackDirection;
     private const int FirstComboIndex = 1;
 
-
-
     public PlayerBasicAttackState(Player player, StateMachine stateMachine, string animationBoolName) : base(player, stateMachine, animationBoolName)
     {
         if (comboLimit != player.attackVelocity.Length)
@@ -28,6 +26,7 @@ public class PlayerBasicAttackState : PlayerState
         base.Enter();
         comboAttackQueued = false;
         ResetComboIndexIfNeeded();
+        SyncAttackSpeed();
 
         attackDirection = player.MoveInput.x != 0 ? (int)player.MoveInput.x : player.facingDirection;
 

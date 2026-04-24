@@ -10,9 +10,12 @@ public abstract class PlayerState : EntityState
     public PlayerState(Player player, StateMachine stateMachine, string animationBoolName) : base(stateMachine, animationBoolName)
     {
         this.player = player;
-        this.animator = player.animator;
-        this.rb = player.rb;
-        this.input = player.input;
+        
+        animator = player.animator;
+        rb = player.rb;
+        input = player.input;
+        entityStats = player.entityStats;
+
     }
 
     public override void Update()

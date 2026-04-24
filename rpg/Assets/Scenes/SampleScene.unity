@@ -22236,8 +22236,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e04725cdf45b3a348a08e579a5986eee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHp: 0
+  currentHealth: 0
   isDead: 0
+  regenInterval: 1
+  canRegenerateHealth: 1
   knockbackPower: {x: 1.5, y: 2.5}
   heavyKnockbackPower: {x: 7, y: 7}
   knockbackDuration: 0.2
@@ -22261,7 +22263,8 @@ MonoBehaviour:
   hitVfx: {fileID: 3653420523983694303, guid: 43365586ef7c5044bb749e3bef704812, type: 3}
   critHitVfx: {fileID: 7795480021857577928, guid: e6d4e38e1d2792a439ae6531a82c4816, type: 3}
   chillVfxColor: {r: 0, g: 1, b: 1, a: 1}
-  originalHitVfxColor: {r: 0, g: 1, b: 1, a: 1}
+  burnVfxColor: {r: 1, g: 0, b: 0, a: 1}
+  electrifyVfxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   tickInterval: 0.2
   lightColorMultiplier: 1.2
   darkColorMultiplier: 0.8
@@ -22282,8 +22285,12 @@ MonoBehaviour:
   whatIsTarget:
     serializedVersion: 2
     m_Bits: 256
-  defaultDuration: 3
+  defaultStatusDuration: 3
   chillSlowMultiplier: 0.4
+  electrifyChargeBuildUp: 0.4
+  fireScale: 0.4
+  iceScale: 0.4
+  lightningScale: 2.5
   counterRecovery: 0.25
 --- !u!114 &1062402942
 MonoBehaviour:
@@ -22297,8 +22304,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09281256e32ff964aaa549d5c32f79a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth:
-    baseValue: 100
+  resources:
+    maxHealth:
+      baseValue: 1000
+    healthRegen:
+      baseValue: 10
   major:
     strength:
       baseValue: 0
@@ -22309,6 +22319,8 @@ MonoBehaviour:
     vitality:
       baseValue: 10
   offense:
+    attackSpeed:
+      baseValue: 1
     damage:
       baseValue: 10
     critPower:
@@ -22320,9 +22332,9 @@ MonoBehaviour:
     fireDamage:
       baseValue: 0
     iceDamage:
-      baseValue: 10
-    lightningDamage:
       baseValue: 0
+    lightningDamage:
+      baseValue: 100
   defense:
     armor:
       baseValue: 0
@@ -22360,6 +22372,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b03eb0b3c2d6fb499cf7187bd7acb38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lightningStrikeVfx: {fileID: 5329052509637128708, guid: fbb7c808e574d6d48ae63415590f4ae6, type: 3}
+  currentCharge: 0
+  maximumCharge: 1
 --- !u!1 &1128426670
 GameObject:
   m_ObjectHideFlags: 0
@@ -22829,8 +22844,12 @@ MonoBehaviour:
   whatIsTarget:
     serializedVersion: 2
     m_Bits: 128
-  defaultDuration: 3
+  defaultStatusDuration: 3
   chillSlowMultiplier: 0.4
+  electrifyChargeBuildUp: 0.4
+  fireScale: 0.4
+  iceScale: 0.4
+  lightningScale: 2.5
 --- !u!114 &1328992611
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22843,8 +22862,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c876dd481775354f87e8bac8274798b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHp: 0
+  currentHealth: 0
   isDead: 0
+  regenInterval: 1
+  canRegenerateHealth: 1
   knockbackPower: {x: 1.5, y: 2.5}
   heavyKnockbackPower: {x: 7, y: 7}
   knockbackDuration: 0.2
@@ -22868,7 +22889,8 @@ MonoBehaviour:
   hitVfx: {fileID: 3653420523983694303, guid: 43365586ef7c5044bb749e3bef704812, type: 3}
   critHitVfx: {fileID: 7795480021857577928, guid: e6d4e38e1d2792a439ae6531a82c4816, type: 3}
   chillVfxColor: {r: 0, g: 1, b: 1, a: 1}
-  originalHitVfxColor: {r: 0, g: 1, b: 1, a: 1}
+  burnVfxColor: {r: 1, g: 0, b: 0, a: 1}
+  electrifyVfxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   tickInterval: 0.2
   lightColorMultiplier: 1.2
   darkColorMultiplier: 0.8
@@ -22885,8 +22907,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09281256e32ff964aaa549d5c32f79a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth:
-    baseValue: 1000
+  resources:
+    maxHealth:
+      baseValue: 1000
+    healthRegen:
+      baseValue: 10
   major:
     strength:
       baseValue: 0
@@ -22897,6 +22922,8 @@ MonoBehaviour:
     vitality:
       baseValue: 0
   offense:
+    attackSpeed:
+      baseValue: 1
     damage:
       baseValue: 10
     critPower:
@@ -22908,7 +22935,7 @@ MonoBehaviour:
     fireDamage:
       baseValue: 0
     iceDamage:
-      baseValue: 10
+      baseValue: 0
     lightningDamage:
       baseValue: 0
   defense:
@@ -22948,6 +22975,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b03eb0b3c2d6fb499cf7187bd7acb38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lightningStrikeVfx: {fileID: 5329052509637128708, guid: fbb7c808e574d6d48ae63415590f4ae6, type: 3}
+  currentCharge: 0
+  maximumCharge: 1
 --- !u!1 &1329039423
 GameObject:
   m_ObjectHideFlags: 0
@@ -23268,7 +23298,8 @@ MonoBehaviour:
   hitVfx: {fileID: 0}
   critHitVfx: {fileID: 0}
   chillVfxColor: {r: 0, g: 1, b: 1, a: 1}
-  originalHitVfxColor: {r: 0, g: 1, b: 1, a: 1}
+  burnVfxColor: {r: 1, g: 0, b: 0, a: 1}
+  electrifyVfxColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   tickInterval: 0.2
   lightColorMultiplier: 1.2
   darkColorMultiplier: 0.8
