@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Chest : MonoBehaviour, IDamageable
+public class ObjectChest : MonoBehaviour, IDamageable
 {
     private Rigidbody2D rb => GetComponentInChildren<Rigidbody2D>();
     private Animator animator => GetComponentInChildren<Animator>();
